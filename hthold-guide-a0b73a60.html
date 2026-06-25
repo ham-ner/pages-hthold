@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>华体会 · 信息卡片介绍</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(145deg, #fde8cd 0%, #f7d9b8 30%, #efc9a3 70%, #e8b98e 100%);
+            min-height: 100vh;
+            padding: 2rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #3e2c1a;
+        }
+
+        .card-grid {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .card {
+            background: #fffcf7;
+            border-radius: 32px;
+            padding: 2rem 2rem 2.5rem;
+            box-shadow: 0 20px 40px -12px rgba(120, 60, 20, 0.25), 0 8px 16px -6px rgba(60, 30, 10, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.25s ease;
+            flex: 1 1 280px;
+            max-width: 360px;
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255, 235, 210, 0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 28px 48px -14px rgba(150, 75, 30, 0.3);
+        }
+
+        .card-wide {
+            flex: 1 1 600px;
+            max-width: 740px;
+        }
+
+        .hero-card {
+            background: linear-gradient(135deg, #fff7ee, #ffefe2);
+            border-left: 8px solid #e89f65;
+        }
+
+        .card h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            color: #5a3820;
+            line-height: 1.2;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #6f4a2a;
+            margin-bottom: 0.75rem;
+            border-bottom: 2px solid #f0d5b6;
+            padding-bottom: 0.4rem;
+            display: inline-block;
+        }
+
+        .card p, .card li {
+            font-size: 1rem;
+            line-height: 1.65;
+            color: #4a3422;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .card ul li {
+            position: relative;
+            padding-left: 1.8rem;
+            margin-bottom: 0.65rem;
+        }
+
+        .card ul li::before {
+            content: "✦";
+            position: absolute;
+            left: 0.1rem;
+            color: #c38454;
+            font-size: 1.2rem;
+        }
+
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0 0.5rem;
+        }
+
+        .tag {
+            background: #f4e1ce;
+            color: #4d2f18;
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            border: 1px solid #e7cbb0;
+        }
+
+        .link-button {
+            display: inline-block;
+            background: #dba87a;
+            color: #2c1c0e;
+            font-weight: 600;
+            padding: 0.6rem 1.8rem;
+            border-radius: 60px;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.15s;
+            border: none;
+            box-shadow: 0 4px 8px rgba(140, 70, 20, 0.1);
+            font-size: 0.95rem;
+            margin-top: 0.8rem;
+            align-self: flex-start;
+        }
+
+        .link-button:hover {
+            background: #cf9564;
+            transform: scale(1.02);
+            box-shadow: 0 6px 14px rgba(120, 60, 15, 0.2);
+        }
+
+        .link-button-soft {
+            background: transparent;
+            border: 2px solid #c98d5e;
+            color: #4d2f18;
+            box-shadow: none;
+        }
+
+        .link-button-soft:hover {
+            background: #f5e3d1;
+            border-color: #b07849;
+        }
+
+        .faq-item {
+            margin-top: 1.2rem;
+            padding-top: 0.8rem;
+            border-top: 1px dashed #e7cfb8;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 600;
+            color: #4d2f18;
+            margin-bottom: 0.25rem;
+        }
+
+        .text-muted {
+            color: #6f5540;
+            font-size: 0.95rem;
+        }
+
+        .flex-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 2rem;
+            align-items: baseline;
+        }
+
+        .inline-link {
+            color: #9c6f47;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid #eacdb3;
+            transition: border-color 0.2s, color 0.2s;
+            padding-bottom: 0.1rem;
+        }
+
+        .inline-link:hover {
+            color: #6f4424;
+            border-bottom-color: #a8764e;
+        }
+
+        .footer-note {
+            margin-top: 3.5rem;
+            text-align: center;
+            color: #664e34;
+            font-size: 0.9rem;
+            max-width: 700px;
+            border-top: 1px solid #dfc2a8;
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 640px) {
+            body { padding: 1.5rem 0.8rem; }
+            .card { padding: 1.6rem; }
+            .hero-card h2 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-grid">
+        <!-- 主视觉卡片 -->
+        <div class="card hero-card card-wide">
+            <h2>华体会 · 真实与温度的连接</h2>
+            <p style="font-size:1.1rem; margin-bottom:0.8rem;">
+                这里不是展示宏大叙事的舞台，而是记录日常感受与可靠信息的共享空间。 
+                <strong>华体会</strong>希望用最朴素的方式，让有用的内容被需要的人看见。
+            </p>
+            <div class="tag-group">
+                <span class="tag">日常随笔</span>
+                <span class="tag">实用指南</span>
+                <span class="tag">安静角落</span>
+                <span class="tag">真诚分享</span>
+            </div>
+            <p class="text-muted" style="margin-top:0.5rem;">
+                每一次浏览都像是与老朋友聊天 —— 没有浮夸的包装，只有实在的讲述。
+            </p>
+        </div>
+
+        <!-- 用途卡片 -->
+        <div class="card">
+            <h3>📌 站点用途</h3>
+            <p>你可以在这里找到：</p>
+            <ul>
+                <li>生活场景中的经验与建议</li>
+                <li>兴趣领域的轻量科普与汇总</li>
+                <li>对常见工具的客观使用笔记</li>
+                <li>偶尔的随笔与书影记录</li>
+            </ul>
+            <p class="text-muted" style="margin-top:0.5rem;">
+                内容由作者亲自整理，不追求日更，但每篇都经过筛选与核对。
+            </p>
+        </div>
+
+        <!-- 适合人群卡片 -->
+        <div class="card">
+            <h3>👥 适合这样的你</h3>
+            <ul>
+                <li>喜欢直接、不绕弯子的阅读体验</li>
+                <li>对网络信息保持审慎，希望参考相对可靠的内容</li>
+                <li>对生活、工具、文化类话题有好奇心</li>
+                <li>不想被算法裹挟，偶尔想看点“人写的东西”</li>
+            </ul>
+            <div style="margin-top:0.6rem;">
+                <span class="tag">不追热点</span>
+                <span class="tag">不标题党</span>
+                <span class="tag">不贩卖焦虑</span>
+            </div>
+        </div>
+
+        <!-- 自然链接段落卡片 (宽) -->
+        <div class="card card-wide">
+            <h3>🔗 关于华体会的一点说明</h3>
+            <p>
+                这个网站由一位喜欢安静分享的爱好者维护。如果你读到某篇文章觉得有收获，或者对某个话题想了解更多，欢迎在站内多逛一逛。所有内容均基于个人理解与公开资料整理，尽量保持中立与准确。
+            </p>
+            <p style="margin-top:0.8rem;">
+                如果你想从源头了解这个站点，可以直接前往 
+                <a href="https://hthold.com.cn" class="inline-link">华体会</a> 
+                的主页。那里汇集了最新的更新与分类索引，也是本站在网络上的固定坐标。页面风格和这里类似 —— 干净、克制、不打扰。
+            </p>
+            <p class="text-muted" style="margin-top:0.6rem;">
+                ⚠️ 提醒：本站不存储任何用户隐私信息，也不含任何商业追踪代码。你可以安心浏览。
+            </p>
+            <a href="https://hthold.com.cn" class="link-button link-button-soft">华体会</a>
+        </div>
+
+        <!-- FAQ 摘要卡片 -->
+        <div class="card">
+            <h3>❓ 常见疑问摘要</h3>
+            <div class="faq-item">
+                <strong>内容可信吗？</strong>
+                <p>作者会尽量标注信息来源，但建议对任何网络内容都保持适度验证习惯。</p>
+            </div>
+            <div class="faq-item">
+                <strong>会更新频繁吗？</strong>
+                <p>不定期更新。比起数量，更在意每一篇的实际帮助。</p>
+            </div>
+            <div class="faq-item">
+                <strong>可以转载或分享吗？</strong>
+                <p>个人非商业用途欢迎转载，标明出处即可。商用请先联系站内邮箱。</p>
+            </div>
+            <p style="margin-top:0.8rem; font-size:0.9rem;">
+                更多疑问可参考站点内“关于”页面，或直接浏览 
+                <a href="https://hthold.com.cn" class="inline-link">华体会</a> 的最新文章。
+            </p>
+        </div>
+
+        <!-- 一句结语卡片（小） -->
+        <div class="card" style="background:#faf1e8; flex:1 1 180px; max-width:280px;">
+            <p style="font-style:italic; font-size:1.05rem; text-align:center; padding:0.5rem 0;">
+                “好的内容像温开水 —— 不烫嘴，却解渴。”
+            </p>
+            <p style="text-align:center; margin-top:0.4rem; color:#7a5e44;">
+                —— 来自 <a href="https://hthold.com.cn" class="inline-link">华体会</a> 的日常
+            </p>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        <p>© 华体会 · 保持审慎，保持善意 · 页面内容仅供个人参考</p>
+        <p style="margin-top:0.3rem; opacity:0.7;">—— 信息卡片式介绍 · 暖色渐变 ——</p>
+    </div>
+</body>
+</html>
